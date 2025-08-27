@@ -1,0 +1,188 @@
+@model ProjectForTraining.Models.Author
+
+@{
+    ViewData["Title"] = "Create New Author";
+}
+
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 fw-bold mb-3">
+                    <i class="bi bi-person-plus"></i> Create New Author
+                </h1>
+                <p class="lead mb-4">Add a new author to your bookstore collection. Fill in the details below to get started.</p>
+            </div>
+            <div class="col-lg-4 text-center">
+                <i class="bi bi-person-plus-fill" style="font-size: 6rem; opacity: 0.8;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Create Form Card -->
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-plus-circle"></i> Author Information
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create" method="post">
+                        <!-- Author ID Field -->
+                        @* <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label asp-for="Id" class="form-label fw-bold">
+                                    <i class="bi bi-hash text-primary"></i> Author ID
+                                </label>
+                                <input asp-for="Id" type="number" class="form-control form-control-lg" 
+                                       placeholder="Enter unique author ID" required />
+                                <div class="form-text">
+                                    <i class="bi bi-info-circle"></i> Enter a unique number for the author
+                                </div>
+                                <span asp-validation-for="Id" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center h-100">
+                                    <div class="text-center w-100">
+                                        <i class="bi bi-person-circle text-muted" style="font-size: 4rem;"></i>
+                                        <p class="text-muted mt-2">Author Avatar</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> *@
+
+                        <!-- Full Name Field -->
+                        <div class="mb-4">
+                            <label asp-for="FullName" class="form-label fw-bold">
+                                <i class="bi bi-person text-primary"></i> Full Name
+                            </label>
+                            <input asp-for="FullName" type="text" class="form-control form-control-lg" 
+                                   placeholder="Enter author's full name" required />
+                            <div class="form-text">
+                                <i class="bi bi-info-circle"></i> Enter the complete name of the author
+                            </div>
+                            <span asp-validation-for="FullName" class="text-danger"></span>
+                        </div>
+
+                        <!-- Additional Information -->
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">
+                                    <i class="bi bi-calendar text-primary"></i> Birth Date
+                                </label>
+                                <input type="date" class="form-control" placeholder="Select birth date" />
+                                <div class="form-text">
+                                    <i class="bi bi-info-circle"></i> Optional: Author's birth date
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">
+                                    <i class="bi bi-geo-alt text-primary"></i> Country
+                                </label>
+                                <select class="form-select">
+                                    <option value="">Select country</option>
+                                    <option value="Jordan">Jordan</option>
+                                    <option value="USA">USA</option>
+                                    <option value="UK">UK</option>
+                                    <option value="Germany">Germany</option>
+                                    <option value="France">France</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <div class="form-text">
+                                    <i class="bi bi-info-circle"></i> Optional: Author's country
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Biography Field -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">
+                                <i class="bi bi-file-text text-primary"></i> Biography
+                            </label>
+                            <textarea class="form-control" rows="4" 
+                                      placeholder="Enter a brief biography about the author (optional)"></textarea>
+                            <div class="form-text">
+                                <i class="bi bi-info-circle"></i> Optional: Brief description about the author
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="row mt-5">
+                            <div class="col-12 text-center">
+                                <div class="btn-group" role="group">
+                                    <button type="submit" class="btn btn-success btn-lg me-2">
+                                        <i class="bi bi-check-circle"></i> Create Author
+                                    </button>
+                                    <a asp-action="Index" class="btn btn-secondary btn-lg me-2">
+                                        <i class="bi bi-arrow-left"></i> Back to List
+                                    </a>
+                                    <button type="reset" class="btn btn-outline-warning btn-lg">
+                                        <i class="bi bi-arrow-clockwise"></i> Reset Form
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Help Information -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card border-0 bg-light">
+                        <div class="card-body">
+                            <h6 class="card-title text-primary">
+                                <i class="bi bi-lightbulb"></i> Tips for Adding Authors
+                            </h6>
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle text-success"></i> 
+                                    <strong>ID:</strong> Use unique numbers for each author
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle text-success"></i> 
+                                    <strong>Name:</strong> Include full name for better identification
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle text-success"></i> 
+                                    <strong>Details:</strong> Add additional information when available
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Auto-generate ID if not provided
+        document.getElementById('Id').addEventListener('blur', function() {
+            if (!this.value) {
+                // Generate a random ID between 1000-9999
+                const randomId = Math.floor(Math.random() * 9000) + 1000;
+                this.value = randomId;
+            }
+        });
+
+        // Form validation enhancement
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const id = document.getElementById('Id').value;
+            const name = document.getElementById('FullName').value;
+            
+            if (!id || !name) {
+                e.preventDefault();
+                alert('Please fill in all required fields (ID and Full Name)');
+                return false;
+            }
+        });
+    </script>
+}

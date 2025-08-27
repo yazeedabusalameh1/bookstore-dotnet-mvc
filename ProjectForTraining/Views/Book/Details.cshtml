@@ -1,0 +1,121 @@
+@model ProjectForTraining.Models.Book
+
+@{
+    ViewData["Title"] = "Book Details";
+}
+
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 fw-bold mb-3">
+                    <i class="bi bi-journal-text"></i> Book Details
+                </h1>
+                <p class="lead mb-4">View detailed information about the selected book.</p>
+            </div>
+            <div class="col-lg-4 text-center">
+                <i class="bi bi-book" style="font-size: 6rem; opacity: 0.8;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Book Details Card -->
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-info-circle"></i> Book Information
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row mb-4">
+                        <div class="col-md-3 text-center">
+                            <div class="mb-3">
+                                <i class="bi bi-journal-bookmark text-primary" style="font-size: 4rem;"></i>
+                            </div>
+                            <h5 class="text-muted">Book ID: @Model.Id</h5>
+                        </div>
+                        <div class="col-md-9">
+                            <h3 class="text-primary mb-3">@Model.Title</h3>
+                            <p class="text-muted mb-2">
+                                <i class="bi bi-person"></i> Author: @(Model.Author?.FullName ?? "Unknown")
+                            </p>
+                            <p class="text-muted">
+                                <i class="bi bi-card-text"></i> @Model.Description
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="border-bottom pb-2 mb-3">
+                                <i class="bi bi-list-ul"></i> Detailed Information
+                            </h5>
+                            <div class="table-responsive">
+                                <table class="table table-borderless">
+                                    <tbody>
+                                        <tr>
+                                            <td class="fw-bold text-muted" style="width: 160px;">
+                                                <i class="bi bi-hash text-primary"></i> Book ID:
+                                            </td>
+                                            <td>
+                                                <span class="badge bg-secondary fs-6">@Model.Id</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-bold text-muted">
+                                                <i class="bi bi-type text-primary"></i> Title:
+                                            </td>
+                                            <td>
+                                                <span class="fs-5 fw-semibold">@Model.Title</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-bold text-muted">
+                                                <i class="bi bi-person text-primary"></i> Author:
+                                            </td>
+                                            <td>
+                                                <span class="fs-6">@(Model.Author?.FullName ?? "Unknown")</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-bold text-muted">
+                                                <i class="bi bi-card-text text-primary"></i> Description:
+                                            </td>
+                                            <td>
+                                                <span class="text-muted">@Model.Description</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <div class="btn-group" role="group">
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-lg me-2">
+                            <i class="bi bi-pencil"></i> Edit Book
+                        </a>
+                        <a asp-action="Index" class="btn btn-secondary btn-lg me-2">
+                            <i class="bi bi-arrow-left"></i> Back to List
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger btn-lg">
+                            <i class="bi bi-trash"></i> Delete Book
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

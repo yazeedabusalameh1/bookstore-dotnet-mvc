@@ -1,0 +1,235 @@
+@model ProjectForTraining.Models.Author
+
+@{
+    ViewData["Title"] = "Edit Author";
+}
+
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 fw-bold mb-3">
+                    <i class="bi bi-pencil-square"></i> Edit Author
+                </h1>
+                <p class="lead mb-4">Update the author's information. The Author ID cannot be changed for security reasons.</p>
+            </div>
+            <div class="col-lg-4 text-center">
+                <i class="bi bi-person-gear" style="font-size: 6rem; opacity: 0.8;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Edit Form Card -->
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-warning text-dark">
+                    <h4 class="mb-0">
+                        <i class="bi bi-pencil"></i> Edit Author Information
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Edit" method="post">
+                        <input type="hidden" asp-for="Id" />
+                        
+                        <!-- Author ID Field (Readonly) -->
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label asp-for="Id" class="form-label fw-bold">
+                                    <i class="bi bi-hash text-primary"></i> Author ID
+                                </label>
+                                <input asp-for="Id" type="number" class="form-control form-control-lg" 
+                                       readonly style="background-color: #f8f9fa; cursor: not-allowed;" />
+                                <div class="form-text">
+                                    <i class="bi bi-shield-lock text-warning"></i> 
+                                    <strong>Read-only:</strong> Author ID cannot be changed for security reasons
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center h-100">
+                                    <div class="text-center w-100">
+                                        <i class="bi bi-person-circle text-muted" style="font-size: 4rem;"></i>
+                                        <p class="text-muted mt-2">Author Avatar</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Full Name Field -->
+                        <div class="mb-4">
+                            <label asp-for="FullName" class="form-label fw-bold">
+                                <i class="bi bi-person text-primary"></i> Full Name
+                            </label>
+                            <input asp-for="FullName" type="text" class="form-control form-control-lg" 
+                                   placeholder="Enter author's full name" required />
+                            <div class="form-text">
+                                <i class="bi bi-info-circle"></i> Enter the complete name of the author
+                            </div>
+                            <span asp-validation-for="FullName" class="text-danger"></span>
+                        </div>
+
+                        <!-- Additional Information -->
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">
+                                    <i class="bi bi-calendar text-primary"></i> Birth Date
+                                </label>
+                                <input type="date" class="form-control" placeholder="Select birth date" />
+                                <div class="form-text">
+                                    <i class="bi bi-info-circle"></i> Optional: Author's birth date
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">
+                                    <i class="bi bi-geo-alt text-primary"></i> Country
+                                </label>
+                                <select class="form-select">
+                                    <option value="">Select country</option>
+                                    <option value="Jordan">Jordan</option>
+                                    <option value="USA">USA</option>
+                                    <option value="UK">UK</option>
+                                    <option value="Germany">Germany</option>
+                                    <option value="France">France</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <div class="form-text">
+                                    <i class="bi bi-info-circle"></i> Optional: Author's country
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Biography Field -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">
+                                <i class="bi bi-file-text text-primary"></i> Biography
+                            </label>
+                            <textarea class="form-control" rows="4" 
+                                      placeholder="Enter a brief biography about the author (optional)"></textarea>
+                            <div class="form-text">
+                                <i class="bi bi-info-circle"></i> Optional: Brief description about the author
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="row mt-5">
+                            <div class="col-12 text-center">
+                                <div class="btn-group" role="group">
+                                    <button type="submit" class="btn btn-warning btn-lg me-2">
+                                        <i class="bi bi-check-circle"></i> Update Author
+                                    </button>
+                                    <a asp-action="Index" class="btn btn-secondary btn-lg me-2">
+                                        <i class="bi bi-arrow-left"></i> Back to List
+                                    </a>
+                                    <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-info btn-lg me-2">
+                                        <i class="bi bi-eye"></i> View Details
+                                    </a>
+                                    <button type="reset" class="btn btn-outline-secondary btn-lg">
+                                        <i class="bi bi-arrow-clockwise"></i> Reset Changes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Current Author Info -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card border-0 bg-info bg-opacity-10">
+                        <div class="card-body">
+                            <h6 class="card-title text-info">
+                                <i class="bi bi-info-circle"></i> Current Author Information
+                            </h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="mb-1">
+                                        <strong>ID:</strong> <span class="badge bg-info">@Model.Id</span>
+                                    </p>
+                                    <p class="mb-1">
+                                        <strong>Name:</strong> <span class="fw-semibold">@Model.FullName</span>
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-1">
+                                        <strong>Status:</strong> <span class="badge bg-success">Active</span>
+                                    </p>
+                                    <p class="mb-1">
+                                        <strong>Last Updated:</strong> <span class="text-muted">Just now</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Help Information -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card border-0 bg-light">
+                        <div class="card-body">
+                            <h6 class="card-title text-primary">
+                                <i class="bi bi-lightbulb"></i> Tips for Editing Authors
+                            </h6>
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle text-success"></i> 
+                                    <strong>ID Protection:</strong> Author ID is locked for security
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle text-success"></i> 
+                                    <strong>Name Updates:</strong> You can change the author's name
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle text-success"></i> 
+                                    <strong>Additional Info:</strong> Add more details when available
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-exclamation-triangle text-warning"></i> 
+                                    <strong>Note:</strong> Changes will be saved immediately
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Form validation enhancement
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const name = document.getElementById('FullName').value;
+            
+            if (!name.trim()) {
+                e.preventDefault();
+                alert('Please enter the author\'s full name');
+                return false;
+            }
+        });
+
+        // Show confirmation before reset
+        document.querySelector('button[type="reset"]').addEventListener('click', function(e) {
+            if (!confirm('Are you sure you want to reset all changes?')) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Highlight readonly field
+        document.addEventListener('DOMContentLoaded', function() {
+            const idField = document.getElementById('Id');
+            idField.style.backgroundColor = '#f8f9fa';
+            idField.style.cursor = 'not-allowed';
+        });
+    </script>
+}
+
+

@@ -1,0 +1,137 @@
+@{
+    ViewData["Title"] = "Home";
+}
+
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-3 fw-bold mb-4">
+                    Welcome to <span class="text-warning">Bookstore</span>
+                </h1>
+                <p class="lead mb-4">
+                    Your comprehensive solution for managing authors, books, and literary works. 
+                    Streamline your bookstore operations with our intuitive management system.
+                </p>
+                <div class="d-flex gap-3">
+                    <a asp-controller="author" asp-action="Index" class="btn btn-light btn-lg">
+                        <i class="bi bi-person"></i> Manage Authors
+                    </a>
+                    <a asp-controller="BookController1" asp-action="Index" class="btn btn-outline-light btn-lg">
+                        <i class="bi bi-journal-text"></i> Browse Books
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <i class="bi bi-book" style="font-size: 8rem; opacity: 0.8;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="container py-5">
+    <div class="row text-center mb-5">
+        <div class="col-12">
+            <h2 class="display-5 fw-bold">Why Choose Our System?</h2>
+            <p class="lead text-muted">Powerful features designed for modern bookstore management</p>
+        </div>
+    </div>
+    
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 text-center border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <div class="feature-icon mb-3">
+                        <i class="bi bi-people-fill text-primary" style="font-size: 3rem;"></i>
+                    </div>
+                    <h4 class="card-title">Author Management</h4>
+                    <p class="card-text text-muted">
+                        Efficiently manage author profiles, track publications, and maintain comprehensive author databases.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card h-100 text-center border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <div class="feature-icon mb-3">
+                        <i class="bi bi-journal-text text-success" style="font-size: 3rem;"></i>
+                    </div>
+                    <h4 class="card-title">Book Catalog</h4>
+                    <p class="card-text text-muted">
+                        Organize your book collection with detailed information, categories, and search capabilities.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card h-100 text-center border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <div class="feature-icon mb-3">
+                        <i class="bi bi-graph-up text-warning" style="font-size: 3rem;"></i>
+                    </div>
+                    <h4 class="card-title">Analytics & Reports</h4>
+                    <p class="card-text text-muted">
+                        Get insights into your bookstore performance with comprehensive analytics and reporting tools.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Stats Section -->
+<div class="bg-light py-5">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-3 mb-4">
+                <div class="d-flex flex-column align-items-center">
+                    <i class="bi bi-people text-primary mb-2" style="font-size: 2.5rem;"></i>
+                    <h3 class="fw-bold text-primary">3</h3>
+                    <p class="text-muted mb-0">Active Authors</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="d-flex flex-column align-items-center">
+                    <i class="bi bi-journal-text text-success mb-2" style="font-size: 2.5rem;"></i>
+                    <h3 class="fw-bold text-success">3</h3>
+                    <p class="text-muted mb-0">Books Available</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="d-flex flex-column align-items-center">
+                    <i class="bi bi-calendar-check text-info mb-2" style="font-size: 2.5rem;"></i>
+                    <h3 class="fw-bold text-info">24/7</h3>
+                    <p class="text-muted mb-0">System Uptime</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="d-flex flex-column align-items-center">
+                    <i class="bi bi-shield-check text-warning mb-2" style="font-size: 2.5rem;"></i>
+                    <h3 class="fw-bold text-warning">100%</h3>
+                    <p class="text-muted mb-0">Secure</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Call to Action -->
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+            <h2 class="display-6 fw-bold mb-4">Ready to Get Started?</h2>
+            <p class="lead text-muted mb-4">
+                Join thousands of bookstore managers who trust our system for their daily operations.
+            </p>
+            <a asp-controller="author" asp-action="Index" class="btn btn-primary btn-lg">
+                <i class="bi bi-arrow-right"></i> Start Managing Authors
+            </a>
+        </div>
+    </div>
+</div>
+
