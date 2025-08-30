@@ -106,5 +106,54 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        // Custom client-side validation
+        $(document).ready(function() {
+            $('form').on('submit', function(e) {
+                var isValid = true;
+                
+                // Check if author is selected
+                var authorId = $('#AuthorId').val();
+                if (authorId == '0') {
+                    $('#AuthorId').addClass('is-invalid');
+                    isValid = false;
+                } else {
+                    $('#AuthorId').removeClass('is-invalid');
+                }
+                
+                // Check if title is filled
+                var title = $('#Titel').val().trim();
+                if (title === '') {
+                    $('#Titel').addClass('is-invalid');
+                    isValid = false;
+                } else {
+                    $('#Titel').removeClass('is-invalid');
+                }
+                
+                // Check if description is filled
+                var description = $('#Description').val().trim();
+                if (description === '') {
+                    $('#Description').addClass('is-invalid');
+                    isValid = false;
+                } else {
+                    $('#Description').removeClass('is-invalid');
+                }
+                
+                if (!isValid) {
+                    e.preventDefault();
+                    // Show error message
+                    if (!$('.alert-danger').length) {
+                        $('<div class="alert alert-danger mt-3">Please fill in all required fields.</div>').insertAfter('.card-header');
+                    }
+                }
+            });
+            
+            // Remove validation classes on input
+            $('input, select, textarea').on('input change', function() {
+                $(this).removeClass('is-invalid');
+            });
+        });
+    </script>
 }
 
