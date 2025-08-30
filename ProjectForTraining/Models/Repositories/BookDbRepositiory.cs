@@ -1,13 +1,12 @@
-﻿using ProjectForTraining.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace ProjectForTraining.Models.Repositories
 {
-    public class BookRepository : IBookstoreRepository<Book>
+    public class BookDbRepositiory : IBookstoreRepository<Book>
     {
         private readonly BookStoreDbContext _context;
 
-        public BookRepository(BookStoreDbContext context)
+        public BookDbRepositiory(BookStoreDbContext context)
         {
             _context = context;
         }
@@ -44,15 +43,10 @@ namespace ProjectForTraining.Models.Repositories
 
         public void Update(int id, Book newBook)
         {
-            var book = Find(id);
-            if (book != null)
-            {
-                book.Title = newBook.Title;
-                book.Description = newBook.Description;
-                book.AuthorId = newBook.AuthorId;
-                book.Author = newBook.Author;
-                _context.SaveChanges();
-            }
+            _context.Update(newBook);
+            _context.SaveChanges();
+        
+            
         }
     }
 }

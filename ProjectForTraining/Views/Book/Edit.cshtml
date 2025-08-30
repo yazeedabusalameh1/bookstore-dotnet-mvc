@@ -41,7 +41,7 @@
                                 <label class="form-label fw-bold">
                                     <i class="bi bi-hash text-primary"></i> Book ID
                                 </label>
-                                <input value="@Model.BookId" class="form-control form-control-lg" readonly style="background:#f8f9fa;cursor:not-allowed;" />
+                                <input value="@(Model.BookId ?? 0)" class="form-control form-control-lg" readonly style="background:#f8f9fa;cursor:not-allowed;" />
                             </div>
                             <div class="col-md-6">
                                 <label asp-for="AuthorId" class="form-label fw-bold">
@@ -49,25 +49,18 @@
                                 </label>
                                 <select asp-for="AuthorId" class="form-select form-select-lg"
                                         asp-items="@(Model?.Authors != null ? new SelectList(Model.Authors, "Id", "FullName") : null)">
-                                    @if (Model?.Authors == null || !Model.Authors.Any())
-                                    {
-                                        <option value="">No authors available</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="">-- Select Author --</option>
-                                    }
+                                    <option value="">-- Select Author --</option>
                                 </select>
                                 <span asp-validation-for="AuthorId" class="text-danger"></span>
                             </div>
                         </div>
 
                         <div class="mt-4">
-                            <label asp-for="Titel" class="form-label fw-bold">
+                            <label asp-for="Title" class="form-label fw-bold">
                                 <i class="bi bi-type text-primary"></i> Title
                             </label>
-                            <input asp-for="Titel" class="form-control form-control-lg" />
-                            <span asp-validation-for="Titel" class="text-danger"></span>
+                            <input asp-for="Title" class="form-control form-control-lg" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
                         </div>
 
                         <div class="mt-4">

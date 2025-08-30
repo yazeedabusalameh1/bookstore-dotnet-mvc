@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ProjectForTraining.Models;
 using ProjectForTraining.Models.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProjectForTraining
 {
@@ -16,8 +17,12 @@ namespace ProjectForTraining
             builder.Services.AddControllersWithViews();
             
             // Register repositories
-            builder.Services.AddSingleton<IBookstoreRepository<Author>, AuthorRepository>();
-            builder.Services.AddSingleton<IBookstoreRepository<Book>, BookRepository>();
+            builder.Services.AddScoped<IBookstoreRepository<Author>, AuthorDbRepository>();
+            builder.Services.AddScoped<IBookstoreRepository<Book>, BookDbRepositiory>();
+            
+            // Register DbContext
+            builder.Services.AddDbContext<BookStoreDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("SqlCon")));
 
             var app = builder.Build();
 

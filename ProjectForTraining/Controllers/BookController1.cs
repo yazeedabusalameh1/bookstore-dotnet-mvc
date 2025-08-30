@@ -36,7 +36,7 @@ namespace ProjectForTraining.Controllers
         {
             var model = new BookAuthorViewModel
             {
-                Authors = authorRepository.List().ToList()
+                Authors = FillSelectList()
             };
             return View("~/Views/Book/Create.cshtml", model);
         }
@@ -46,26 +46,29 @@ namespace ProjectForTraining.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(BookAuthorViewModel model)
         {
-            // Server-side validation for Author selection
-            if (model.AuthorId <= 0)
+            if (!model.AuthorId.HasValue || model.AuthorId.Value <= 0)
             {
-                ViewBag.Message = "Please select an author from the list ";
+                ViewBag.Message = "Please select an author from the list";
+                var vmodel = new BookAuthorViewModel
+                {
+                    Authors = FillSelectList()
+                };
+                return View("~/Views/Book/Create.cshtml", vmodel);
+            }
+
+            if (!ModelState.IsValid)
+            {
                 model.Authors = authorRepository.List().ToList();
                 return View("~/Views/Book/Create.cshtml", model);
             }
 
-            //if (!ModelState.IsValid)
-            //{
-            //    model.Authors = authorRepository.List().ToList();
-            //    return View("~/Views/Book/Create.cshtml", model);
-            //}
-
-            var author = authorRepository.Find(model.AuthorId);
+            var author = authorRepository.Find(model.AuthorId.Value);
             var book = new Book
             {
-                Id = model.BookId,
-                Title = model.Titel,
-                Description = model.Description,
+                Id = model.BookId ?? 0,
+                Title = model.Title ?? "",
+                Description = model.Description ?? "",
+                AuthorId = model.AuthorId.Value,
                 Author = author
             };
             bookRepository.Add(book);
@@ -80,9 +83,9 @@ namespace ProjectForTraining.Controllers
             var viewModel = new BookAuthorViewModel
             {
                 BookId = book.Id,
-                Titel = book.Title,
+                Title = book.Title,
                 Description = book.Description,
-                AuthorId = book.Author?.Id ?? 0,
+                AuthorId = book.AuthorId,
                 Authors = authorRepository.List().ToList()
             };
             return View("~/Views/Book/Edit.cshtml", viewModel);
@@ -91,26 +94,23 @@ namespace ProjectForTraining.Controllers
         // POST: BookController1/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, BookAuthorViewModel model)
+        public ActionResult Edit(int id, BookAuthorViewModel viewModel)
         {
-            if (model.AuthorId <= 0)
+            if (!viewModel.AuthorId.HasValue || viewModel.AuthorId.Value <= 0)
             {
-                ViewBag.Message = "Please select an author from the list ";
-                model.Authors = authorRepository.List().ToList();
-                return View("~/Views/Book/Edit.cshtml", model);
+                ViewBag.Message = "Please select an author from the list";
+                viewModel.Authors = authorRepository.List().ToList();
+                return View("~/Views/Book/Edit.cshtml", viewModel);
             }
 
-            if (!ModelState.IsValid)
-            {
-                model.Authors = authorRepository.List().ToList();
-                return View("~/Views/Book/Edit.cshtml", model);
-            }
+            var author = authorRepository.Find(viewModel.AuthorId.Value);
             var updated = new Book
             {
-                Id = model.BookId,
-                Title = model.Titel,
-                Description = model.Description,
-                Author = authorRepository.Find(model.AuthorId)
+                Id = viewModel.BookId ?? 0,
+                Title = viewModel.Title ?? "",
+                Description = viewModel.Description ?? "",
+                AuthorId = viewModel.AuthorId.Value,
+                Author = author
             };
             bookRepository.Update(id, updated);
             return RedirectToAction(nameof(Index));
@@ -132,5 +132,13 @@ namespace ProjectForTraining.Controllers
             bookRepository.Delete(id);
             return RedirectToAction(nameof(Index));
         }
+
+        List<Author> FillSelectList()
+        {
+            var authors = authorRepository.List().ToList();
+            authors.Insert(0, new Author { Id = 0, FullName = "--- Please Select an Author ---" });
+            return authors;
+        }
+
     }
 }

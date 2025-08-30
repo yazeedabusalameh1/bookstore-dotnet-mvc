@@ -59,11 +59,11 @@
                         </div>
 
                         <div class="mt-4">
-                            <label asp-for="Titel" class="form-label fw-bold">
+                            <label asp-for="Title" class="form-label fw-bold">
                                 <i class="bi bi-type text-primary"></i> Title
                             </label>
-                            <input asp-for="Titel" class="form-control form-control-lg" placeholder="Enter book title" />
-                            <span asp-validation-for="Titel" class="text-danger"></span>
+                            <input asp-for="Title" class="form-control form-control-lg" placeholder="Enter book title" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
                         </div>
 
                         <div class="mt-4">
@@ -123,12 +123,12 @@
                 }
                 
                 // Check if title is filled
-                var title = $('#Titel').val().trim();
+                var title = $('#Title').val().trim();
                 if (title === '') {
-                    $('#Titel').addClass('is-invalid');
+                    $('#Title').addClass('is-invalid');
                     isValid = false;
                 } else {
-                    $('#Titel').removeClass('is-invalid');
+                    $('#Title').removeClass('is-invalid');
                 }
                 
                 // Check if description is filled

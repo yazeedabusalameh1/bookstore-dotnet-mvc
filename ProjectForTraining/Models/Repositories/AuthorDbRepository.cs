@@ -1,13 +1,10 @@
-﻿using ProjectForTraining.Models;
-using Microsoft.EntityFrameworkCore;
-
-namespace ProjectForTraining.Models.Repositories
+﻿namespace ProjectForTraining.Models.Repositories
 {
-    public class AuthorRepository : IBookstoreRepository<Author>
+    public class AuthorDbRepository : IBookstoreRepository<Author>
     {
         private readonly BookStoreDbContext _context;
 
-        public AuthorRepository(BookStoreDbContext context)
+        public AuthorDbRepository(BookStoreDbContext context)
         {
             _context = context;
         }
@@ -40,12 +37,8 @@ namespace ProjectForTraining.Models.Repositories
 
         public void Update(int Id, Author newAuthor)
         {
-            var author = Find(Id);
-            if (author != null)
-            {
-                author.FullName = newAuthor.FullName;
-                _context.SaveChanges();
-            }
+            _context.Update(newAuthor);
+            _context.SaveChanges();
         }
     }
 }
