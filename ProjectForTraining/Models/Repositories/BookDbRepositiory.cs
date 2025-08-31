@@ -48,5 +48,12 @@ namespace ProjectForTraining.Models.Repositories
         
             
         }
+        public List<Book> Search(string item)
+        {
+            var result = _context.Books.Include(a => a.Author).Where(b => b.Title.Contains(item)
+            || b.Description.Contains(item) 
+            || b.Author.FullName.Contains(item)).ToList();
+            return result ;
+        }
     }
 }

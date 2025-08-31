@@ -43,6 +43,33 @@
             background: #f8f9fa;
             border-top: 1px solid #dee2e6;
         }
+        
+        /* Search Bar Styles */
+        .navbar .input-group {
+            max-width: 400px;
+        }
+        
+        .navbar .form-control {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .navbar .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .navbar .form-control:focus {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            color: white;
+            box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+        }
+        
+        .navbar .btn-outline-light:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
     </style>
 </head>
 <body>
@@ -56,7 +83,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Home" asp-action="Index">
                             <i class="bi bi-house"></i> Home
@@ -70,6 +97,25 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="BookController1" asp-action="Index">
                             <i class="bi bi-journal-text"></i> Books
+                        </a>
+                    </li>
+                </ul>
+                
+                <!-- Search Bar -->
+                <form class="d-flex me-3" asp-controller="BookController1" asp-action="Search" method="get">
+                    <div class="input-group" style="min-width: 300px;">
+                        <input class="form-control" type="search" name="term" placeholder="Search books..." 
+                               aria-label="Search books" value="@Context.Request.Query["term"]">
+                        <button class="btn btn-outline-light" type="submit">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
+                
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="BookController1" asp-action="Create">
+                            <i class="bi bi-plus-circle"></i> Add Book
                         </a>
                     </li>
                 </ul>

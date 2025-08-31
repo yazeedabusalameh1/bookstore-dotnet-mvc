@@ -1,4 +1,5 @@
-﻿namespace ProjectForTraining.Models.Repositories
+﻿
+namespace ProjectForTraining.Models.Repositories
 {
     public class AuthorDbRepository : IBookstoreRepository<Author>
     {
@@ -33,6 +34,11 @@
         public IList<Author> List()
         {
             return _context.Authors.ToList();
+        }
+
+        public List<Author> Search(string item)
+        {
+            return _context.Authors.Where(a => a.FullName.Contains(item)).ToList();
         }
 
         public void Update(int Id, Author newAuthor)

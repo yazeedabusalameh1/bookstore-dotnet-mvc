@@ -42,6 +42,12 @@ namespace ProjectForTraining.Models.Repositories
                 .ToList();
         }
 
+        public List<Book> Search(string item)
+        {
+            return _context.Books.Where(a => a.Title.Contains(item)).ToList();
+
+        }
+
         public void Update(int id, Book newBook)
         {
             var book = Find(id);

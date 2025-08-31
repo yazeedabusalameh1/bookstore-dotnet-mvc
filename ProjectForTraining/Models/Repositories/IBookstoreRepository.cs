@@ -7,5 +7,6 @@
         void Add(TEntity entity);
         void Update(int Id , TEntity entity);
         void Delete(int Id);
+        List<TEntity> Search(string item);
     }
 }

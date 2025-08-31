@@ -140,5 +140,11 @@ namespace ProjectForTraining.Controllers
             return authors;
         }
 
+        public ActionResult Search(string term)
+        {
+            var result = bookRepository.Search(term);
+            return View("~/Views/Book/Index.cshtml", result);   
+        }
+
     }
 }
